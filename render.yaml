@@ -27,17 +27,4 @@ services:
       - key: AI_MODEL
         value: qwen/qwen3.8-27b
       - key: FX_USD_INR
-        value: "87"
-
-  - type: cron
-    name: invoicepilot-agent-runner
-    runtime: node
-    plan: free
-    schedule: "0 */4 * * *"
-    buildCommand: npm install
-    startCommand: node -e "fetch(process.env.APP_URL + '/api/agents/run', { method: 'POST', headers: { 'x-agent-secret': process.env.AGENT_SECRET } }).then(r=>r.text()).then(console.log)"
-    envVars:
-      - key: AGENT_SECRET
-        sync: false
-      - key: APP_URL
-        sync: false
+        value: "92"

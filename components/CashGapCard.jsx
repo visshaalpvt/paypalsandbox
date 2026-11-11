@@ -240,7 +240,7 @@ export default function CashGapCard({ onAskAI }) {
           {/* Expected Inflows breakdown */}
           <div style={{ marginTop: 14 }}>
             <span style={{ fontSize: 12, fontWeight: 600, color: "var(--mute)", textTransform: "uppercase" }}>
-              Expected Inflows (Net of PayPal Fees & FX Spread)
+              Expected Inflows (Estimated Net of PayPal Fees, GST & FX Spread)
             </span>
             {plan.inflows?.length === 0 ? (
               <div style={{ fontSize: 13, color: "var(--mute)", marginTop: 6 }}>

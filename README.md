@@ -1,7 +1,7 @@
 # ✈️ InvoicePilot
 
 **An approval-gated AI collections agent & Cash-Gap Shield for freelancers who bill international clients through PayPal.**
-Built for the PayPal AI Hackathon 2026. Powered by **PayPal Invoicing API v2 + Webhooks (sandbox)** and **Gemini 2.5 Flash / Claude (tool use)**.
+Built for the PayPal AI Hackathon 2026. Powered by **PayPal Invoicing API v2 + Webhooks (sandbox)** and **Multi-LLM Tool-Use (Groq ultra-fast Qwen/LLaMA with automatic fallback to Google Gemini / DeepSeek / OpenAI)**.
 
 > Late payments, awkward chasing, PayPal's hidden India receiving fees and uncertainty over whether rent can be covered are four major freelancer headaches. InvoicePilot solves them with AI automation, and never moves money without human approval.
 
@@ -25,12 +25,14 @@ Built for the PayPal AI Hackathon 2026. Powered by **PayPal Invoicing API v2 + W
 ## 🏗️ Architecture
 
 ```
-Browser (Next.js, AG Grid, Cash-Gap Shield, Chat with Voice input)
+Browser (Next.js, AG Grid, Cash-Gap Shield, Chat with Voice input, Agent Controls & Audit Ledger)
    │
-   ├─► /api/agent    ──► Multi-LLM Tool-use Engine (Gemini 2.5 Flash / Claude / DeepSeek)
+   ├─► /api/agent    ──► Multi-LLM Tool-use Engine (Groq Qwen-27B / Gemini 2.5 / DeepSeek)
    │                      Tools: create_invoice, list_invoices, get_client_insights,
    │                             plan_cash, send_reminder, issue_late_fee_invoice,
    │                             calc_net_receipt, record_evidence, get_dispute_packet
+   │
+   ├─► /api/agents/* ──► Autonomous Collections & Cash-Flow Agents with P1–P9 Policy Guardrails
    │
    ├─► /api/cashplan ──► Cash-Gap Shield deterministic forecasting & shortfall detection
    │
@@ -48,7 +50,7 @@ Browser (Next.js, AG Grid, Cash-Gap Shield, Chat with Voice input)
 ### Prerequisites
 - Node.js 18+
 - PayPal Developer Account ([developer.paypal.com](https://developer.paypal.com))
-- Google Gemini API Key ([aistudio.google.com](https://aistudio.google.com/apikey)) or Anthropic API Key
+- Groq API Key ([console.groq.com](https://console.groq.com/keys)) or Google Gemini Key ([aistudio.google.com](https://aistudio.google.com/apikey))
 
 ### Steps
 ```bash
