@@ -11,6 +11,10 @@
 ### Tagline
 An approval-gated AI collections agent & Cash-Gap Shield for freelancers who bill international clients through PayPal.
 
+### Live URLs
+- **Live Deployed App**: https://invoicepilot-l9j9.onrender.com
+- **GitHub Repository**: https://github.com/visshaalpvt/paypalsandbox
+
 ### Category
 Agentic Commerce / Freelancer FinTech
 
@@ -88,7 +92,7 @@ We built **InvoicePilot** to give freelancers an autonomous money agent that cre
 - [x] Production build clean: `npm run build` exits with code 0.
 - [x] Hosted configuration ready: `render.yaml` with environment blueprints.
 - [x] README and LICENSE (MIT) documented.
-- [ ] Push to GitHub public repository.
-- [ ] Connect repo to Render and deploy.
+- [x] Push to GitHub public repository. (https://github.com/visshaalpvt/paypalsandbox)
+- [x] Connect repo to Render and deploy. (https://invoicepilot-l9j9.onrender.com)
 - [ ] Record demo video using the script above (< 3 mins, public YouTube link).
 - [ ] Submit on Devpost before deadline!
