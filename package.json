@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "scripts": { "dev": "next dev", "build": "next build", "start": "next start" },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "node tests/policy.test.mjs"
+  },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.40.0",
     "ag-grid-community": "^33.0.0",
