@@ -12,6 +12,8 @@ services:
         sync: false
       - key: PAYPAL_WEBHOOK_ID
         sync: false
+      - key: GROQ_API_KEY
+        sync: false
       - key: GEMINI_API_KEY
         sync: false
       - key: AGENT_SECRET
@@ -23,7 +25,7 @@ services:
       - key: PAYPAL_BASE
         value: https://api-m.sandbox.paypal.com
       - key: AI_MODEL
-        value: gemini-2.5-flash
+        value: qwen/qwen3.8-27b
       - key: FX_USD_INR
         value: "87"
 

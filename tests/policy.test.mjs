@@ -1,6 +1,7 @@
 import { checkPolicy, evaluateToneGuide } from "../lib/agents/policy.js";
+import { grossUpToNetINR, netINR } from "../lib/rates.js";
 
-console.log("=== Running Policy Engine (P1–P9) Unit Tests ===");
+console.log("=== Running Policy Engine & Cash-Gap Unit Tests ===");
 
 let passed = 0;
 let failed = 0;
@@ -109,6 +110,23 @@ assert("P7 blocks firm tone for high reliability client under 8d overdue", !rP7_
 const rValid = checkPolicy(validAction, { invoice: mockInvoice });
 assert("Valid action passes all checks", rValid.allowed && rValid.rule === "ALL_PASSED");
 
-console.log(`\nPolicy Test Results: ${passed} passed, ${failed} failed.`);
+// Cash-Gap Shield: grossUpToNetINR guarantees net INR >= shortfall
+console.log("\n=== Testing Cash-Gap Shield (grossUpToNetINR) ===");
+const shortfallTestCases = [29092, 144445, 200000];
+for (const shortfall of shortfallTestCases) {
+  // Test across both fallback rate 87 and live rate 93.96
+  for (const rate of [87, 93.96]) {
+    const grossUSD = grossUpToNetINR(shortfall, "USD", rate);
+    const roundedUSD = Math.ceil(grossUSD / 25) * 25;
+    const net = netINR(roundedUSD, "USD", 0.04, rate);
+    assert(
+      `Shortfall ₹${shortfall.toLocaleString()} at rate ${rate} -> $${roundedUSD} yields ₹${net.netINR.toLocaleString()} (diff: +₹${net.netINR - shortfall})`,
+      net.netINR >= shortfall,
+      `Net ₹${net.netINR} fell short of ₹${shortfall}`
+    );
+  }
+}
+
+console.log(`\nTest Results: ${passed} passed, ${failed} failed.`);
 if (failed > 0) process.exit(1);
 

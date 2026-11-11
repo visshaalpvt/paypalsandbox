@@ -40,8 +40,9 @@ We built **InvoicePilot** to give freelancers an autonomous money agent that cre
 
 ### How We Built It
 - **PayPal Invoicing API v2 & Webhooks**: Integrated `/v2/invoicing/invoices` for draft creation, automatic numbering, sending, and reminder delivery. Real-time webhook listener for `INVOICING.INVOICE.PAID` and `CUSTOMER.DISPUTE.*` events with signature verification.
-- **Multi-LLM Agentic Engine**: Powered by **Google Gemini 2.5 Flash** (and Anthropic Claude / DeepSeek) using OpenAI-compatible tool calling across 9 custom financial tools.
-- **Frontend & Full Stack**: Built on **Next.js 14 (App Router)** with **AG Grid Community** for responsive invoice management, Web Speech Recognition for voice commands, and **Render** for cloud deployment.
+- **Multi-LLM Agentic Engine**: Powered by **Groq ultra-fast LLaMA/Qwen** and **Google Gemini** (with Anthropic Claude & DeepSeek support) using OpenAI-compatible tool calling across financial tools, plus batched structured output for autonomous collection evaluations.
+- **Autonomous Collections & Cash-Flow Agents**: A background loop evaluates overdue invoices, checks policy guardrails (P1–P9), and queues or sends PayPal reminders via `POST /v2/invoicing/invoices/{id}/remind` (recorded with HTTP 204).
+- **Frontend & Full Stack**: Built on **Next.js 14 (App Router)** with **AG Grid Community** for responsive invoice management, Web Speech Recognition for voice commands, and **Render** for cloud deployment with automated cron runners.
 - **Deterministic Cash Engine**: Built a pure, mathematical cash-flow projection model (`lib/cashgap.js` and `lib/rates.js`) so the LLM never hallucinates fee calculations or cash shortfalls.
 
 ---
