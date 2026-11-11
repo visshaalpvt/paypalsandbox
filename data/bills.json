@@ -1,0 +1,15 @@
+[
+  {
+    "id": "bill_1",
+    "label": "Studio Rent",
+    "amountINR": 50000,
+    "dayOfMonth": 20
+  },
+  {
+    "id": "bill_2",
+    "label": "Software Subscriptions",
+    "amountINR": 12000,
+    "dayOfMonth": 1
+  }
+]
+

@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: invoicepilot
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_SECRET
+        sync: false
+      - key: PAYPAL_WEBHOOK_ID
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: AGENT_SECRET
+        sync: false
+      - key: AGENT_ENABLED
+        value: "true"
+      - key: AGENT_MAX_ACTIONS
+        value: "5"
+      - key: PAYPAL_BASE
+        value: https://api-m.sandbox.paypal.com
+      - key: AI_MODEL
+        value: gemini-2.5-flash
+      - key: FX_USD_INR
+        value: "87"
+
+  - type: cron
+    name: invoicepilot-agent-runner
+    runtime: node
+    plan: free
+    schedule: "0 */4 * * *"
+    buildCommand: npm install
+    startCommand: node -e "fetch(process.env.APP_URL + '/api/agents/run', { method: 'POST', headers: { 'x-agent-secret': process.env.AGENT_SECRET } }).then(r=>r.text()).then(console.log)"
+    envVars:
+      - key: AGENT_SECRET
+        sync: false
+      - key: APP_URL
+        sync: false
