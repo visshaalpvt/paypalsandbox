@@ -111,3 +111,4 @@ assert("Valid action passes all checks", rValid.allowed && rValid.rule === "ALL_
 
 console.log(`\nPolicy Test Results: ${passed} passed, ${failed} failed.`);
 if (failed > 0) process.exit(1);
+

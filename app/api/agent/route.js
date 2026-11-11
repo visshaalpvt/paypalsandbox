@@ -122,11 +122,22 @@ export async function POST(req) {
     const { messages, autopilot = false } = await req.json();
     const pending = [], log = [];
 
+    const groqKey = process.env.GROQ_API_KEY;
     const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
     const deepseekKey = process.env.DEEPSEEK_API_KEY || process.env.deepseek_API_KEY;
     const anthropicKey = process.env.ANTHROPIC_API_KEY;
     const openaiKey = process.env.OPENAI_API_KEY;
-    const groqKey = process.env.GROQ_API_KEY;
+
+    if (groqKey) {
+      const result = await runOpenAICompatible({
+        messages, autopilot, pending, log,
+        apiKey: groqKey,
+        endpoint: "https://api.groq.com/openai/v1/chat/completions",
+        defaultModel: "qwen/qwen3.8-27b",
+        providerName: "Groq",
+      });
+      return Response.json(result);
+    }
 
     if (geminiKey) {
       const result = await runOpenAICompatible({
